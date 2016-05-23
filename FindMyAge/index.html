@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+	input{
+		display:block;
+		padding:10px 20px;
+		margin:5px;
+	}
+	button{
+		padding:10px 20px;
+		margin:5px;
+	}
+	</style>
+</head>
+<body>
+<input type="text" id="il"  placeholder="İl">
+<input type="text" id="ay" onchange="check()" placeholder="Ay">
+<input type="text" id="gun" placeholder="Gun">
+<input type="text" id="saat" placeholder="Saat">
+<input type="text" id="deqiqe" placeholder="Deqiqe">
+<input type="text" id="saniye" placeholder="Saniye">
+<button onclick="findMyAge()" id="hesabla">Hesabla</button>
+<p id="netice"></p>
+<script type="text/javascript">
+	function findMyAge(){
+		var gelenIl=document.getElementById("il").value;
+		var gelenAy=document.getElementById("ay").value;
+		var gelenGun=document.getElementById("gun").value;
+		var gelenSaat=document.getElementById("saat").value;
+		var gelenDeqiqe=document.getElementById("deqiqe").value;
+		var gelenSaniye=document.getElementById("saniye").value;
+
+		var userIl=Number(gelenIl);
+		var userAy=Number(gelenAy)
+		var userGun=Number(gelenGun)
+		var userSaat=Number(gelenSaat)
+		var userDeqiqe=Number(gelenDeqiqe)
+		var userSaniye=Number(gelenSaniye)
+
+		var today=new Date();
+		var todayTime=today.getTime();
+		var myBirthDay=new Date(userIl,userAy,userGun,userSaat,userDeqiqe,userSaniye);
+		var myBirthDayTime=myBirthDay.getTime();
+		var myTime=todayTime-myBirthDayTime;
+		var saniye=Math.floor(myTime/1000);
+		var qaliqMilliSaniye=myTime-saniye*1000;
+		var deqiqe=Math.floor(saniye/60);
+		var qaliqSaniye=saniye-deqiqe*60;
+
+		var saat=Math.floor(deqiqe/60);
+		var qaliqDeqiqe=deqiqe-saat*60;
+
+		var gun=Math.floor(saat/24);
+		var qaliqSaat=saat-gun*24;
+
+		var il=Math.floor(gun/365);
+		var qaliqGun=gun-il*365;
+	
+ 	
+ 		document.getElementById("netice").innerHTML="Sen "+il+ " il  "+qaliqGun+ " Gün "+qaliqSaat+ "  Saat "+qaliqDeqiqe+ " Deqiqe "+qaliqSaniye+ " saniye yaşamısan";
+	}
+
+	
+    function check(){
+    	var gelenAy=document.getElementById("ay").value;
+		var userAy=Number(gelenAy);
+		if(userAy>12){
+			document.getElementById("ay").value="Duz yaz";
+		}else{
+			
+		}
+    }
+</script>
+</body>
+</html>
